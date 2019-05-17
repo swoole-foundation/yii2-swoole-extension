@@ -1,0 +1,30 @@
+{
+  "name": "xialeistudio/yii2-swoole",
+  "description": "running yii2 web application on swoole server",
+  "type": "yii2-extension",
+  "version": "1.0.0",
+  "keywords": [
+    "yii2",
+    "swoole"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "xialeistudio",
+      "email": "xialeistudio@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "require-dev": {
+    "eaglewu/swoole-ide-helper": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "swoole\\foundation\\": "src/",
+      "tests\\": "tests/"
+    }
+  }
+}
