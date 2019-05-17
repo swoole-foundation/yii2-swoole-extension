@@ -12,6 +12,10 @@
     {
       "name": "xialeistudio",
       "email": "xialeistudio@gmail.com"
+    },
+    {
+      "name": "swoole-foundation",
+      "email": "xialeistudio@gmail.com"
     }
   ],
   "minimum-stability": "stable",
