@@ -7,7 +7,7 @@
 use swoole\foundation\web\Server;
 use Swoole\Runtime;
 
-Runtime::enableCoroutine();
+Runtime::enableCoroutine(false);
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', getenv('PHP_ENV') === 'development' ? 'dev' : 'prod');
 
