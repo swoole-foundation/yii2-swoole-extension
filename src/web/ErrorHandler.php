@@ -203,7 +203,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
      * Console环境异常渲染
      * @param Exception $exception
      */
-    protected function renderConsoleException(Exception $exception)
+    protected function renderConsoleException($exception)
     {
         if ($exception instanceof UnknownCommandException) {
             // display message and suggest alternatives in case of unknown command
