@@ -2,7 +2,7 @@
   "name": "swoole-foundation/yii2-swoole-extension",
   "description": "running yii2 web application on swoole server",
   "type": "yii2-extension",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": [
     "yii2",
     "swoole"
