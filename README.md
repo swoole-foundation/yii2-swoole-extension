@@ -1,4 +1,4 @@
-#　Yii2 Swoole Extension
+# Yii2 Swoole Extension
 
 Running Yii2 application on Swoole Environment.
 
@@ -7,8 +7,6 @@ This extension based on Component-Driven development.
 There is no side effects to your business or Yii2 framework.
 
 [中文文档](README-CN.md)
-
-[TOC]
 
 ## Get Started
 
@@ -23,7 +21,7 @@ There is no side effects to your business or Yii2 framework.
      ```
 
 3. Create server configuration file.
-		```php
+	```php
 	// config/server.php
 	<?php
 	  return [
@@ -42,7 +40,7 @@ There is no side effects to your business or Yii2 framework.
 	```
 
 4. Create bootstrap file.
-		```php
+	```php
 	// bootstrap.php
 	<?php
 	/**
@@ -70,7 +68,7 @@ There is no side effects to your business or Yii2 framework.
 	```
 
 5. Start your app.
-		```bash
+	```bash
 	php bootstrap.php
 	```
 
