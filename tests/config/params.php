@@ -1,6 +1,6 @@
 <?php
 /**
- * 业务参数
+ * your custom params
  * @author xialeistudio
  * @date 2019-05-17
  */

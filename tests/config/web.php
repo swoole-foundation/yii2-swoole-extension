@@ -1,6 +1,6 @@
 <?php
 /**
- * web应用配置
+ * configuration for web
  * @author xialeistudio
  * @date 2019-05-17
  */

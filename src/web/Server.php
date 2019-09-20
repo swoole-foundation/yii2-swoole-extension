@@ -13,30 +13,29 @@ use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 
 /**
- * Web服务器
  * Class WebServer
  * @package app\servers
  */
 class Server extends BaseObject
 {
     /**
-     * @var string 监听主机
+     * @var string listen address
      */
     public $host = 'localhost';
     /**
-     * @var int 监听端口
+     * @var int listen port
      */
     public $port = 9501;
     /**
-     * @var int 进程模型
+     * @var int process mode
      */
     public $mode = SWOOLE_PROCESS;
     /**
-     * @var int SOCKET类型
+     * @var int socket type
      */
     public $sockType = SWOOLE_SOCK_TCP;
     /**
-     * @var array 服务器选项
+     * @var array options for swoole server
      */
     public $options = [
         'worker_num' => 2,
@@ -44,11 +43,11 @@ class Server extends BaseObject
         'task_worker_num' => 2
     ];
     /**
-     * @var array 应用配置
+     * @var array application configuration
      */
     public $app = [];
     /**
-     * @var \Swoole\Http\Server swoole server实例
+     * @var \Swoole\Http\Server swoole server instance
      */
     public $server;
 
@@ -74,7 +73,7 @@ class Server extends BaseObject
     }
 
     /**
-     * 事件监听
+     * listen swoole events
      * @return array
      */
     public function events()
@@ -89,7 +88,7 @@ class Server extends BaseObject
     }
 
     /**
-     * 启动服务器
+     * start the server
      * @return bool
      */
     public function start()
@@ -98,7 +97,6 @@ class Server extends BaseObject
     }
 
     /**
-     * master启动
      * @param \Swoole\Http\Server $server
      */
     public function onStart(\Swoole\Http\Server $server)
@@ -107,7 +105,8 @@ class Server extends BaseObject
     }
 
     /**
-     * 工作进程启动时实例化框架
+     * initialize Yii application on worker started.
+     * every worker process has a Yii application
      * @param \Swoole\Http\Server $server
      * @param int $workerId
      * @throws InvalidConfigException
@@ -120,7 +119,7 @@ class Server extends BaseObject
 
 
     /**
-     * 工作进程异常
+     * handle worker error
      * @param \Swoole\Http\Server $server
      * @param $workerId
      * @param $workerPid
@@ -133,7 +132,7 @@ class Server extends BaseObject
     }
 
     /**
-     * 处理请求
+     * handle web request
      * @param \Swoole\Http\Request $request
      * @param \Swoole\Http\Response $response
      */
@@ -146,7 +145,7 @@ class Server extends BaseObject
     }
 
     /**
-     * 分发任务
+     * dispatch task
      * @param \Swoole\Http\Server $server
      * @param $taskId
      * @param $workerId

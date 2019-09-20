@@ -20,10 +20,16 @@ use yii\base\InvalidConfigException;
 class Application extends \yii\web\Application
 {
     /**
-     * @var string 任务处理器命名空间
+     * @var string namespace for task classes
      */
     public $taskNamespace = 'app\\tasks';
 
+    /**
+     * @inheritDoc
+     * @return int
+     * @author xialeistudio
+     * @date 2019/9/20
+     */
     public function run()
     {
         try {
@@ -49,6 +55,7 @@ class Application extends \yii\web\Application
     }
 
     /**
+     * Get swoole server instance
      * @return \Swoole\Http\Server|mixed
      * @throws InvalidConfigException
      */

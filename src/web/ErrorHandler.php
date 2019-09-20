@@ -149,7 +149,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
     }
 
     /**
-     * Web环境异常渲染
+     * Render exception on web environment
      * @param Exception $exception
      * @throws InvalidRouteException
      * @throws \yii\console\Exception
@@ -200,7 +200,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
     }
 
     /**
-     * Console环境异常渲染
+     * Render exception on cli environment
      * @param Exception $exception
      */
     protected function renderConsoleException($exception)
