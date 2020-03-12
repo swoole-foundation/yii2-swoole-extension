@@ -29,7 +29,7 @@ There is no side effects to your business or Yii2 framework.
 	   'port' => 9501,
 	   'mode' => SWOOLE_PROCESS,
 	   'sockType' => SWOOLE_SOCK_TCP,
-	   'app' => require __DIR__ . '/web.php', // your original web.php
+	   'app' => require __DIR__ . '/swoole.php', 
 	   'options' => [ // options for swoole server
 	       'pid_file' => __DIR__ . '/../runtime/swoole.pid',
 	       'worker_num' => 2,
@@ -39,40 +39,60 @@ There is no side effects to your business or Yii2 framework.
 	];
 	```
 
-4. Create bootstrap file.
+4. Create swoole.php and replace the default web components of Yii2。
+	
+	> Thanks for [@RicardoSette](https://github.com/RicardoSette)
+	
 	```php
-	// bootstrap.php
+	// config/swoole.php
 	<?php
-	/**
-	 * @author xialeistudio
-	 * @date 2019-05-17
-	 */
 	
-	use swoole\foundation\web\Server;
-	use Swoole\Runtime;
+	$config = require __DIR__ . '/web.php';
 	
-	// Warning: singleton in coroutine environment is untested!
-	Runtime::enableCoroutine();
-	defined('YII_DEBUG') or define('YII_DEBUG', true);
-	defined('YII_ENV') or define('YII_ENV', getenv('PHP_ENV') === 'development' ? 'dev' : 'prod');
+	$config['components']['response']['class'] = swoole\foundation\web\Response::class;
+	$config['components']['request']['class'] = swoole\foundation\web\Request::class;
+	$config['components']['errorHandler']['class'] = swoole\foundation\web\ErrorHandler::class;
 	
-	require __DIR__ . '/vendor/autoload.php';
-	require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
-	
-	// require your server configuration
-	$config = require __DIR__ . '/config/server.php';
-	// construct a server instance
-	$server = new Server($config);
-	// start the swoole server
-	$server->start();
+	return $config;
 	```
+	
+	
+	
+5. Create bootstrap file.
 
-5. Start your app.
-	```bash
-	php bootstrap.php
-	```
+  ```php
+  // bootstrap.php
+  <?php
+  /**
+   * @author xialeistudio
+   * @date 2019-05-17
+   */
+  
+  use swoole\foundation\web\Server;
+  use Swoole\Runtime;
+  
+  // Warning: singleton in coroutine environment is untested!
+  Runtime::enableCoroutine();
+  defined('YII_DEBUG') or define('YII_DEBUG', true);
+  defined('YII_ENV') or define('YII_ENV', getenv('PHP_ENV') === 'development' ? 'dev' : 'prod');
+  
+  require __DIR__ . '/vendor/autoload.php';
+  require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
+  
+  // require your server configuration
+  $config = require __DIR__ . '/config/server.php';
+  // construct a server instance
+  $server = new Server($config);
+  // start the swoole server
+  $server->start();
+  ```
 
-6. Congratulations! Your first Yii2 Swoole Application is running!
+6. Start your app.
+  ```bash
+  php bootstrap.php
+  ```
+
+7. Congratulations! Your first Yii2 Swoole Application is running!
 
 ## Examples
 
