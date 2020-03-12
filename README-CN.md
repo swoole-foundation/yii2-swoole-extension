@@ -6,10 +6,12 @@ yii2-swoole基于Yii2组件化进行编程，对业务和Yii2无侵入性。
 ## 快速开始
 
 1. 初始化Yii2应用
+
 1. 安装扩展
     ```bash
     composer require swoole-foundation/yii2-swoole-extension
     ```
+    
 1. 新建服务器配置(`config/server.php`)
     ```php
    <?php
@@ -22,7 +24,7 @@ yii2-swoole基于Yii2组件化进行编程，对业务和Yii2无侵入性。
        'port' => 9501,
        'mode' => SWOOLE_PROCESS,
        'sockType' => SWOOLE_SOCK_TCP,
-       'app' => require __DIR__ . '/web.php', // 原来的web.php配置
+       'app' => require __DIR__ . '/swoole.php', 
        'options' => [
            'pid_file' => __DIR__ . '/../runtime/swoole.pid',
            'worker_num' => 2,
@@ -30,8 +32,27 @@ yii2-swoole基于Yii2组件化进行编程，对业务和Yii2无侵入性。
            'task_worker_num' => 2,
        ]
    ];
+   ```
+   
+1. 添加swoole.php配置，替换Yii2默认的Web组件
+
+    ```php
+    // config/swoole.php
+    <?php
+    
+    $config = require __DIR__ . '/web.php';
+    
+    $config['components']['response']['class'] = swoole\foundation\web\Response::class;
+    $config['components']['request']['class'] = swoole\foundation\web\Request::class;
+    $config['components']['errorHandler']['class'] = swoole\foundation\web\ErrorHandler::class;
+    
+    return $config;
     ```
+
+    
+
 1. 新增启动脚本(`index.php`)
+    
     ```php
     <?php
     /**
@@ -54,11 +75,12 @@ yii2-swoole基于Yii2组件化进行编程，对业务和Yii2无侵入性。
     $server = new Server($config);
     $server->start();
     ```
+    
 1. 启动应用
     ```bash
     php index.php
     ```
- 
+
 ## 示例项目
 
 **tests** 目录下有测试用的完整项目。
